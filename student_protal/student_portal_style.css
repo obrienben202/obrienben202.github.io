@@ -1,3 +1,8 @@
+/* Student Portal - Responsive stylesheet
+   Updated: 2025-12-25 by GitHub Copilot
+   This file merges your original styles with responsive helpers and mobile-first layout.
+*/
+
 /* --- 1. Base Styles & Body --- */
 body {
     font-family: Arial, sans-serif;
@@ -6,6 +11,19 @@ body {
     padding: 0;
     color: #333333;
 }
+
+/* ========== Responsive helpers (added) ========== */
+/* Predictable box sizing */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Prevent accidental horizontal scroll as a last resort */
+html, body { max-width: 100%; }
+
+/* Responsive images/icons */
+img, svg, .icon { max-width: 100%; height: auto; display: block; }
+
+/* Allow flex/grid children to shrink inside containers */
+.content-wrapper, .portal-main { min-width: 0; }
 
 /* --- 2. Header (Dark Blue Banner) --- */
 header {
@@ -40,13 +58,16 @@ header p {
 /* --- New Section for Content Wrapper & Dropdowns --- */
 /* ------------------------------------------------ */
 
-/* CRITICAL FIX 1: New Wrapper for positioning context */
+/* CRITICAL FIX 1: New Wrapper for positioning context (improved for responsiveness) */
 .content-wrapper {
-    position: relative; 
+    position: relative;
     max-width: 1200px;
     margin: 0 auto;
     /* Ensure there is no height issue with the wrapper */
-    min-height: 50px; 
+    min-height: 50px;
+    padding-left: 16px;   /* horizontal padding for small screens */
+    padding-right: 16px;
+    min-width: 0;         /* lets children shrink on mobile */
 }
 
 /* --- 3. Navigation Bar (Pill Tabs) --- */
@@ -57,6 +78,7 @@ header p {
     padding: 0;
     list-style: none;
     margin: 0;
+    overflow-x: auto; /* allow scrolling on small screens */
 }
 
 .navbar a {
@@ -69,6 +91,7 @@ header p {
     display: block;
     font-weight: bold;
     transition: background-color 0.3s;
+    white-space: nowrap; /* prevent wrapping of each tab */
 }
 
 .navbar a:hover,
@@ -76,14 +99,14 @@ header p {
     background-color: #5599cc; /* Highlight color on hover/active */
 }
 
-/* CRITICAL FIX 2: Dropdown Section Positioning (Now positioned BELOW the Navbar) */
+/* CRITICAL FIX 2: Dropdown Section Positioning (Now positioned BELOW the Navbar on wide screens, static on small screens) */
 .dropdown-section {
     position: absolute;
-    top: 50px; /* MOVED from 0 to 50px to sit below the navbar */
+    top: 50px; /* sits below the navbar */
     left: 0;
     right: 0;
-    z-index: 1000; 
-    background: #ffffff; 
+    z-index: 1000;
+    background: #ffffff;
     border: 1px solid #ddd;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -98,7 +121,7 @@ header p {
 }
 .dropdown-grid .card {
     /* Each item takes a proportional width in the flex container */
-    flex: 0 0 calc(25% - 15px); 
+    flex: 0 0 calc(25% - 15px);
     min-width: 150px; /* Ensure a minimum size */
     background: #f9f9f9;
     border-radius: 4px;
@@ -124,7 +147,6 @@ header p {
     margin-bottom: 5px;
 }
 
-
 /* ------------------------------------------- */
 /* --- 4. Main Content Layout (Grid) --- */
 /* ------------------------------------------- */
@@ -132,35 +154,40 @@ header p {
     /* Main container centers the content */
     max-width: 1200px;
     /* FIX 3: Reduced top margin since dropdowns are now correctly positioned */
-    margin: 20px auto; 
+    margin: 20px auto;
     padding: 0 20px;
 
-    /* Grid for the two main sections */
+    /* mobile-first: single column */
     display: grid;
-    /* Columns: News (1fr), News (1fr), Quick Links (250px wide) */
-    grid-template-columns: 1fr 1fr 250px;
-    gap: 30px; 
+    grid-template-columns: 1fr;
+    gap: 20px;
 }
 
-.news-area {
-    /* News section spans the first two columns */
-    grid-column: 1 / span 2;
+/* medium screens: two columns */
+@media (min-width: 720px) {
+  .portal-main {
+    grid-template-columns: 1fr 1fr; /* two equal columns */
+  }
+  .news-area { grid-column: 1 / span 2; }
+  .quick-links-area { grid-column: auto; }
 }
 
-.quick-links-area {
-    /* Quick links section takes the third column */
-    grid-column: 3 / 3;
+/* large screens: restore three-column desktop layout */
+@media (min-width: 1024px) {
+  .portal-main {
+    grid-template-columns: 1fr 1fr 250px; /* restore desktop layout: news / news / quick-links */
+    gap: 30px;
+  }
+  .news-area { grid-column: 1 / span 2; }
+  .quick-links-area { grid-column: 3 / 3; }
 }
 
 /* --- 5. News Section Styling --- */
 .latest-news {
-    /* *** UPDATED: FLEXBOX FOR ALIGNMENT *** */
     display: flex;
     justify-content: space-between; /* Pushes H2 and button to edges */
     align-items: center; /* Vertically centers the title and button */
     flex-wrap: wrap; /* Allows the news-grid to wrap below */
-    /* ************************************** */
-
     padding: 0;
     border: none;
 }
@@ -172,11 +199,10 @@ header p {
     margin-bottom: 0; /* Ensures tight alignment with the button */
 }
 
-/* *** NEW: Styling for the Post News Button *** */
+/* Post News Button */
 #post-news-area {
-    margin: 0; /* Remove previous margins for alignment */
-    /* Ensure the link inside the div respects the new alignment */
-    display: flex; 
+    margin: 0;
+    display: flex;
     align-items: center;
 }
 
@@ -192,7 +218,6 @@ header p {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s, transform 0.1s;
     font-size: 0.9em;
-    /* Margin to push it slightly away from the news title if needed */
     margin-left: 10px;
 }
 
@@ -200,24 +225,33 @@ header p {
     background-color: #d16913; /* Slightly darker shade on hover */
     transform: translateY(-1px); /* Small lift effect */
 }
-/* ********************************************* */
-
 
 .news-grid {
     display: grid;
-    /* Three equal columns for news cards */
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: 1fr; /* mobile: single column */
     gap: 20px;
     margin-top: 10px;
-    /* Ensure the grid takes the full width of the news-area container */
-    width: 100%; 
+    width: 100%;
+}
+
+/* two columns on small tablets/large phones */
+@media (min-width: 600px) {
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* three columns on larger screens */
+@media (min-width: 900px) {
+  .news-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .news-card {
     background: white;
     padding: 20px;
     border-radius: 5px;
-    /* Use a light border for definition, no strong shadow */
     border: 1px solid #e0e0e0;
 }
 
@@ -261,7 +295,7 @@ header p {
 
 /* --- 6. Quick Links Sidebar --- */
 .quick-links-area h3 {
-    color: #333; 
+    color: #333;
     font-size: 1.4em;
     padding-bottom: 10px;
     margin-top: 0;
@@ -280,28 +314,55 @@ header p {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: #063f66; 
+    color: #063f66;
     padding: 10px 0;
     border-bottom: 1px solid #f0f0f0;
     font-weight: 500;
 }
 
 .quick-links-area li:last-child a {
-    border-bottom: none; 
+    border-bottom: none;
 }
 
 .quick-links-area .icon {
     margin-right: 10px;
-    color: #3f78a0; 
+    color: #3f78a0;
     font-size: 1.2em;
 }
 
 /* --- Footer Styling --- */
 footer {
-    clear: both; 
-    margin-top: 20px; 
+    clear: both;
+    margin-top: 20px;
     text-align: center;
     padding: 10px 0;
     background: #333;
     color: white;
 }
+
+/* --- Dropdown and navbar small-screen behavior --- */
+@media (max-width: 920px) {
+  .dropdown-section {
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+    box-shadow: none;
+    padding: 12px;
+    border: none;
+  }
+  .navbar { padding: 8px; }
+}
+
+/* Small screen tweaks */
+@media (max-width: 480px) {
+  header { padding: 14px 8px; }
+  header h1 { font-size: 1.6em; }
+  .content-wrapper { padding-left: 12px; padding-right: 12px; }
+  .portal-main { padding: 0 12px; }
+  .news-grid { gap: 12px; }
+  .dropdown-grid .card { flex: 0 0 48%; }
+}
+
+/* Optional last-resort overflow guard (comment out if not needed) */
+/* html, body { overflow-x: hidden; } */
