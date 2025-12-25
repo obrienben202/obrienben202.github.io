@@ -1,0 +1,68 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #1b9aee;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  color: #fff;
+  margin-bottom: 30px;
+  font-size: 50px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.login-box {
+  background-color: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  min-width: 320px;
+}
+
+.login-box label {
+  display: block;
+  text-align: left;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* --- UPDATED: Login Button Styling --- */
+.login-box button {
+  margin-top: 20px;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  
+  /* --- CHANGED: Using Accent Color (#e67e22) for consistency --- */
+  background-color: #e67e22; 
+  color: white;
+  
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added subtle shadow */
+  transition: background-color 0.3s;
+}
+
+.login-box button:hover {
+  /* --- CHANGED: Darker Accent Color (#d16913) for consistency --- */
+  background-color: #d16913;
+}
