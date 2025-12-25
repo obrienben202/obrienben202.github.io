@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal</title>
+    <link href="student_portal_style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header>
+        <p>Student Portal</p>
+        <h1 id="user-info">Welcome, ${fullName} to your student portal!</h1>
+        <button id="logout-btn" class="logout-button">Logout</button>
+    </header>
+
+    <div class="content-wrapper">
+
+        <nav class="navbar">
+            <a href="#" onclick="toggleDropdown('schoolToolsDropdown'); return false;">📁 My Work</a>
+            <a href="#" onclick="toggleDropdown('subjectDropdown'); return false;">🎓 Subjects</a>
+            <a href="#" onclick="toggleDropdown('supportDropdown'); return false;">💬 Support</a>
+            <!-- <a href="#" onclick="toggleDropdown('gradesDropdown'); return false;">📊 Grades</a> -->
+            <a href="#" id="admin-nav-link" onclick="toggleDropdown('adminDropdown'); return false;">⚙️ Admin</a> 
+        </nav>
+
+        <div id="adminDropdown" class="dropdown-section" style="display: none;">
+            <div class="dropdown-grid">
+                <div class="card"><a href="add-news.html">📰 Add News</a></div>
+				<div class="grid-label"> IT</div>
+				<div class="card"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdtj63T3DvYAUmjX75w18saknOMYVmUBpG1dymCU-0gRC4RVA/viewform?usp=dialog" target="_blank">➕ Add User or Remove Users (Form)</a></div>
+				<div class="card"><a href="https://drive.google.com/drive/u/0/folders/134RJ_oH61Pue2hfHEkSRSXHfKIlun9hc" target="_blank"> 📁 Student IT Shared folder</a></div>
+            </div>
+        </div>
+
+        <div id="schoolToolsDropdown" class="dropdown-section" style="display: none;">
+            <div class="dropdown-grid">
+                <div class="card"><a href="https://www.eskooly.com/bb/StudentPortal/signin.php" target="_blank">📊 My Attendance</a></div>
+                <div class="card"><a href="https://mail.google.com" target="_blank">📧 Email</a></div>
+                <div class="card"><a href="https://www.eskooly.com/bb/StudentPortal/mytimetable.php" target="_blank">📅 View timetable</a></div>
+                <div class="card"><a href="https://www.google.com/calendar" target="_blank">📆 Calendar</a></div>
+                <div class="card"><a href="https://classroom.google.com" target="_blank">📚 Google Classroom</a></div>
+                <div class="card"><a href="https://drive.google.com" target="_blank">📁 Drive</a></div>
+            </div>
+        </div>
+
+        <div id="subjectDropdown" class="dropdown-section" style="display: none;">
+            <div class="dropdown-grid">
+                    <div class="card"><a href="subjects/english.html" target="_blank">📘 English</a></div>
+                    <div class="card"><a href="subjects/maths.html" target="_blank">📐 Maths</a></div>
+                    <div class="card"><a href="subjects/science.html" target="_blank">🔬 Science</a></div>
+                    <div class="card"><a href="subjects/history.html" target="_blank">📜 History</a></div>
+                    <div class="card"><a href="subjects/geography.html" target="_blank">🌍 Geography</a></div>
+                    <div class="card"><a href="subjects/french.html" target="_blank">🇫🇷 French</a></div>
+                    <div class="card"><a href="subjects/foodtech.html" target="_blank">👩‍🍳 Food Tech</a></div>
+                    <div class="card"><a href="subjects/drama.html" target="_blank">🎭 Drama</a></div>
+                    <div class="card"><a href="subjects/business.html" target="_blank">📊 Business</a></div>
+                    <div class="card"><a href="subjects/art.html" target="_blank">🎨 Art</a></div>
+                    <div class="card"><a href="subjects/digitaltech.html" target="_blank">💻 Digital Tech</a></div>
+                    <div class="card"><a href="subjects/welshbacc.html" target="_blank">🏆 Welsh Bacc</a></div>
+                    <div class="card"><a href="subjects/technolog.html" target="_blank">🖥️ ICT</a></div>
+                    <div class="card"><a href="subjects/woodwork.html" target="_blank">🪚 Wood Work</a></div>
+                    <div class="card"><a href="subjects/re.html" target="_blank">⛪ RE</a></div>
+                    <div class="card"><a href="subjects/pe.html" target="_blank">⚽ PE</a></div>
+                    <div class="card"><a href="subjects/music.html" target="_blank">🎼 Music</a></div>
+
+                    <!-- Extras -->
+                    <div class="card"><a href="https://library.school.edu" target="_blank">📚 Library</a></div>
+                    <div class="card"><a href="subjects/useful-links.html">🔗 Useful Links</a></div>
+            </div>
+        </div>
+
+        <div id="supportDropdown" class="dropdown-section" style="display: none;">
+            <div class="dropdown-grid">
+                    <div class="card"><a href="ask_question.html">❓ Ask a Question</a></div>
+                    <div class="card"><a href="https://docs.google.com/document/d/guide" target="_blank">📖 Study Help Guide</a></div>
+                    <div class="card"><a href="skills-and-strategies.html" target="_blank">🧠 Study Skills & Strategies</a></div> 
+                    <!-- <div class="card"><a href="" target="_blank">It Help Desk</a></div> -->
+            </div>
+        </div>
+
+        <div id="gradesDropdown" class="dropdown-section" style="display: none;">
+            <div class="dropdown-grid">
+                    <div class="card"><a href="view-grades.html">📊 View My Grades</a></div>
+                    <div class="card"><a href="https://www.eskooly.com/bb/StudentPortal/reportcard.phpl">📋 Report Card</a></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="portal-main">
+
+        <div class="news-area">
+
+            <section class="latest-news">
+                <h2><span class="icon">📰</span> Latest News</h2>
+
+                <div id="post-news-area" style="margin-bottom:1rem; display:none;">
+                    <a href="add-news.html"><button id="open-post-page">➕ Post News</button></a>
+                </div>
+
+                <div class="news-grid">
+
+                    <div id="dynamic-news"></div>
+                     <!--<div class="news-card">
+                        <img src="images/ilp_support.jpg" alt="ILP Term3 Update">
+                        <h3>ILPs Term3</h3>
+                        <p style="font-size:0.8em; margin-bottom:5px;"><em>Published: 04 Dec 2025</em></p>
+                        <p>Complete Your ILP (Individual Learning Plan) – Term 3</p>
+                        <a href="ILPs_Term3.html" class="read-more">Read More</a>
+                    </div>-->
+
+                     <!--<div class="news-card">
+                        <img src="images/ilp_support.jpg" alt="ILP Term2 Update">
+                        <h3>ILPs Term2</h3>
+                        <p style="font-size:0.8em; margin-bottom:5px;"><em>Published: 10 Jan 2025</em></p>
+                        <p>Complete Your ILP (Individual Learning Plan) – Term 2</p>
+                        <a href="ILPs_Term2.html" class="read-more">Read More</a>
+                    </div>-->
+
+                    <div class="news-card">
+                        <img src="images/ilp_support.jpg" alt="ILP Term1 Update">
+                        <h3>ILPs Term1</h3>
+                        <p style="font-size:0.8em; margin-bottom:5px;"><em>Published: 04 Dec 2025</em></p>
+                        <p>Complete Your ILP (Individual Learning Plan) – Term 1</p>
+                        <a href="ILPs_Term1.html" class="read-more">Read More</a>
+                    </div>
+
+                    <div class="news-card">
+                        <img src="images/update.png" alt="Protal Update">
+                        <h3>Student Portal Updated!</h3>
+                        <p style="font-size:0.8em; margin-bottom:5px;"><em>Published: Ongoing updates</em></p>
+                        <p>We’ve improved access to your subjects and grades. Explore the new features now!</p>
+                        <a href="portal_update.html" class="read-more">Read More</a>
+                    </div>
+
+                    <div class="news-card">
+                        <img src="images/exam.png" alt="New Staff Portal Update">
+                        <h3>Upcoming Exams </h3>
+                        <p style="font-size:0.8em; margin-bottom:5px;"><em>Published: 10 July 2025</em></p>
+                        <p>Make sure to check your exam timetable and prepare using the revision resources.</p>
+                        <a href="exam-schedule.html" class="read-more">Read More</a>
+                    </div>
+
+                    <div class="news-card">
+                        <img src="images/activities.png" alt="New Staff Portal Update">
+                        <h3>Clubs and Activities Sign-Up </h3>
+                        <p style="font-size:0.8em; margin-bottom:5px;"><em>Published: 10 July 2025</em></p>
+                        <p>Explore the new list of school clubs and sign up for your interests.</p>
+                        <a href="clubs.html" class="read-more">Read More</a>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+        <div class="quick-links-area">
+            <h3>Quick Links</h3>
+            <ul>
+                <li>
+                    <a href="https://www.eskooly.com/bb/StudentPortal/mytimetable.php" target="_blank"><span class="icon">📅</span> View timetable</a>
+                </li>
+                <li>
+                    <a href="https://classroom.google.com/" target="_blank"><span class="icon">📚</span> Google Classroom</a>
+                </li>
+				<li>
+                    <a href="https://gmail.com" target="_blank"><span class="icon">📧</span> Email</a>
+                </li>
+                <li>
+                    <a href="https://drive.google.com/drive/my-drive" target="_blank"><span class="icon">📁</span> My Drive</a>
+                </li>
+                <li>
+                    <a href="ask_question.html"><span class="icon">❓</span> Ask a Question</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+    
+    <script>
+        // Toggle Dropdown function
+        function toggleDropdown(id) {
+            const dropdowns = document.querySelectorAll('.dropdown-section');
+            dropdowns.forEach(section => {
+                if (section.id === id) {
+                    section.style.display = (section.style.display === 'block') ? 'none' : 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+    <script>
+        (function(){
+            const role = sessionStorage.getItem('userRole');
+            const fullName = sessionStorage.getItem('fullName') || 'Unknown User';
+            const authorizedRoles = ['admin', 'staff', 'HoD']; // Define allowed roles for admin features
+
+            // --------------------------------------------------------
+            // 1. ADMIN NAVIGATION LINK VISIBILITY
+            // --------------------------------------------------------
+            const adminNavLink = document.getElementById('admin-nav-link');
+            // If the role is NOT one of the authorized roles, hide the navigation link
+            if (adminNavLink && !authorizedRoles.includes(role)) {
+                adminNavLink.style.display = 'none';
+            }
+
+
+            // --------------------------------------------------------
+            // 2. POST NEWS BUTTON VISIBILITY (Updated Logic)
+            // The existing logic already makes it visible for 'staff', 'admin', 'HR'.
+            // To restrict it to just Admin/HR/HoD, we update the check.
+            // --------------------------------------------------------
+            const postArea = document.getElementById('post-news-area');
+            if (postArea) {
+                // Only show if the user is in the authorized roles list
+                if (authorizedRoles.includes(role)) {
+                    postArea.style.display = 'block';
+                } else {
+                    postArea.style.display = 'none'; // Explicitly hide for everyone else
+                }
+            }
+
+
+            // The existing adminDropdown logic in this block seems incomplete/mis-ID'd, so focusing on the features below.
+            // The first script block already handles the `adminDropdown` link visibility using the `admin-nav-link` ID.
+
+            // --------------------------------------------------------
+            // 3. ADMIN / PORTAL MANAGEMENT FEATURES
+            // --------------------------------------------------------
+
+            // Storage keys
+            const NEWS_KEY = 'studentPortal_latestNews';
+            const PORTAL_KEY = 'studentPortal_customPortalItems';
+
+            // Utility: load and save JSON safe
+            function loadJSON(key){
+                try{
+                    const raw = localStorage.getItem(key);
+                    return raw ? JSON.parse(raw) : [];
+                }catch(e){
+                    console.error('Failed to load', key, e);
+                    return [];
+                }
+            }
+            function saveJSON(key, val){
+                try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){ console.error('Failed to save', key, e); }
+            }
+
+            // CRITICAL UPDATE for Dynamic News to use the new card style
+            function renderNews(){
+                const container = document.getElementById('dynamic-news');
+                if (!container) return;
+                const items = loadJSON(NEWS_KEY);
+                container.innerHTML = '';
+                items.slice().reverse().forEach((item, idx) => {
+                    const div = document.createElement('div');
+                    // Use the new CSS class for the compact card format
+                    div.className = 'news-card';
+                    div.innerHTML = `
+                        ${item.image ? `<img src="${item.image}" alt="${escapeHtml(item.title)}">` : ''}
+                        <h3>${escapeHtml(item.title)}</h3>
+                        <p style="font-size:0.8em; margin-bottom:5px;"><em>Published: ${escapeHtml(item.date)}</em></p>
+                        <p>${escapeHtml(item.content)}</p>
+                        ${item.url ? `<a href="${escapeHtml(item.url)}" class="read-more">Read More</a>` : ''}
+                        ${ authorizedRoles.includes(role) ? `<div style="margin-top:.5rem;"><button data-idx="${idx}" class="remove-news">Remove</button></div>` : '' } `;
+                    container.appendChild(div);
+                });
+
+                // Attach remove handlers for authorized roles
+                if (authorizedRoles.includes(role)){
+                    container.querySelectorAll('.remove-news').forEach(btn => {
+                        btn.addEventListener('click', function(){
+                            const i = parseInt(this.dataset.idx,10);
+                            const items = loadJSON(NEWS_KEY);
+                            // items rendered reversed earlier; remove corresponding
+                            const targetIndex = items.length - 1 - i;
+                            if (targetIndex >=0){ items.splice(targetIndex,1); saveJSON(NEWS_KEY, items); renderNews(); }
+                        });
+                    });
+                }
+            }
+
+            // Escaping helper to avoid naive injection
+            function escapeHtml(str){
+                if (!str) return '';
+                return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[s]));
+            }
+
+            // Post news form handler (kept intact)
+            const form = document.getElementById('post-news-form');
+            if (form){
+                form.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    const title = document.getElementById('news-title').value.trim();
+                    const content = document.getElementById('news-content-input').value.trim();
+                    const url = document.getElementById('news-url').value.trim();
+                    const image = document.getElementById('news-image').value.trim();
+                    if (!title || !content){ alert('Please provide title and content.'); return; }
+                    const items = loadJSON(NEWS_KEY);
+                    items.push({ title, content, url, image, author: fullName, date: new Date().toLocaleDateString() });
+                    saveJSON(NEWS_KEY, items);
+                    form.reset();
+                    renderNews();
+                    alert('News posted.');
+                });
+                document.getElementById('cancel-post').addEventListener('click', ()=>form.reset());
+            }
+
+            // Initial render
+            renderNews();
+
+            // OPTIONAL: Admin portal manager modal (kept intact, added authorizedRoles check)
+            if (authorizedRoles.includes(role)){ // Check for ALL authorized roles
+                // Create small floating manager button
+                const mgr = document.createElement('div');
+                mgr.style.position = 'fixed'; mgr.style.right = '12px'; mgr.style.bottom = '12px'; mgr.style.zIndex = 2000;
+                mgr.innerHTML = `<button id="open-portal-mgr">Manage Portal Items</button>`;
+                document.body.appendChild(mgr);
+
+                // Create modal
+                const modal = document.createElement('div');
+                modal.id = 'portal-mgr-modal';
+                modal.style.position = 'fixed'; modal.style.left = 0; modal.style.top = 0; modal.style.right =0; modal.style.bottom =0;
+                modal.style.display = 'none'; modal.style.background = 'rgba(0,0,0,0.4)'; modal.style.padding='40px';
+                modal.innerHTML = `
+                    <div style="background:#fff;padding:20px;max-width:720px;margin:0 auto;border-radius:6px;">
+                        <h3>Portal Manager</h3>
+                        <form id="portal-item-form">
+                            <input id="portal-title" placeholder="Item text (e.g. My Tasks)" style="width:100%;margin-bottom:.5rem;" required />
+                            <input id="portal-url" placeholder="URL (relative or absolute)" style="width:100%;margin-bottom:.5rem;" required />
+                            <input id="portal-section" placeholder="Section id (e.g. myWorkDropdown) - optional" style="width:100%;margin-bottom:.5rem;" />
+                            <div style="display:flex;gap:.5rem;"><button type="submit">Add Item</button><button type="button" id="close-portal-mgr">Close</button></div>
+                        </form>
+                        <h4>Existing Custom Items</h4>
+                        <div id="portal-items-list"></div>
+                    </div>`;
+                document.body.appendChild(modal);
+
+                document.getElementById('open-portal-mgr').addEventListener('click', ()=>{ modal.style.display='block'; renderPortalItems(); });
+                document.getElementById('close-portal-mgr').addEventListener('click', ()=>{ modal.style.display='none'; });
+
+                const pform = document.getElementById('portal-item-form');
+                pform.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    const title = document.getElementById('portal-title').value.trim();
+                    const url = document.getElementById('portal-url').value.trim();
+                    const section = document.getElementById('portal-section').value.trim();
+                    if (!title || !url){ alert('Provide title and URL'); return; }
+                    const items = loadJSON(PORTAL_KEY);
+                    items.push({ title, url, section });
+                    saveJSON(PORTAL_KEY, items);
+                    document.getElementById('portal-title').value = '';
+                    document.getElementById('portal-url').value = '';
+                    document.getElementById('portal-section').value = '';
+                    renderPortalItems();
+                    insertPortalItemToDom({ title, url, section });
+                });
+
+                function renderPortalItems(){
+                    const list = document.getElementById('portal-items-list');
+                    const items = loadJSON(PORTAL_KEY);
+                    list.innerHTML = '';
+                    items.forEach((it,i)=>{
+                        const el = document.createElement('div');
+                        el.style.display='flex'; el.style.justifyContent='space-between'; el.style.alignItems='center'; el.style.padding='.25rem 0';
+                        el.innerHTML = `<div>${escapeHtml(it.title)} — <small>${escapeHtml(it.url)}</small> ${it.section?`<em>(${escapeHtml(it.section)})</em>`:''}</div><div><button data-i="${i}" class="remove-portal">Remove</button></div>`;
+                        list.appendChild(el);
+                    });
+                    list.querySelectorAll('.remove-portal').forEach(btn=>btn.addEventListener('click', function(){
+                        const i = parseInt(this.dataset.i,10); const items = loadJSON(PORTAL_KEY); items.splice(i,1); saveJSON(PORTAL_KEY, items); renderPortalItems(); // TODO: also remove from DOM if inserted
+                    }));
+                }
+
+                function insertPortalItemToDom(item){
+                    // If a section id was provided and exists, insert as a card link
+                    if (!item.section) return;
+                    const section = document.getElementById(item.section);
+                    if (!section) return; // nothing to attach to
+                    const card = document.createElement('div'); card.className='card';
+                    const a = document.createElement('a'); a.href = item.url; a.textContent = item.title; card.appendChild(a);
+                    // Append to first child grid if present
+                    const grid = section.querySelector('.dropdown-grid');
+                    if (grid) grid.appendChild(card);
+                }
+
+                // On load, insert any existing portal items into DOM
+                loadJSON(PORTAL_KEY).forEach(insertPortalItemToDom);
+            }
+        })();
+    </script>
+
+    <footer>
+        <p>© 2025 Staff Portal. All rights reserved.</p>
+        <p>Developed by the IT Support Team</p>
+    </footer>
+</body>
+</html>
