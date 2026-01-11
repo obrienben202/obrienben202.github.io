@@ -1,16 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("login-form");
   const errorEl = document.getElementById("error-message");
+  const submitBtn = form.querySelector("button"); // Select the button for UI updates
+
+  // UX Improvement: Automatically focus the username field on load
+  document.getElementById("username").focus();
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    // Reset UI state
+    errorEl.textContent = "";
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Logging in...";
 
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
     const endpoint = "https://script.google.com/macros/s/AKfycbwDA57CtHRv1NoY922XpMfuDFHHy_NEfOhlh1QkUIDf1NVbOASaDzqHzSXB3alv9ZTMrA/exec";
 
     try {
-      // Send as application/x-www-form-urlencoded to avoid CORS preflight
       const controller = new AbortController();
       const timeoutMs = 10000;
       const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
@@ -20,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(endpoint, {
         method: "POST",
         mode: "cors",
+        redirect: "follow", // Ensure we follow Google Apps Script redirects
         headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
         body,
         signal: controller.signal
@@ -28,9 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
       clearTimeout(timeoutId);
 
       if (!response.ok) {
-        console.error("Login request failed:", response.status, response.statusText);
-        errorEl.textContent = `Server error: ${response.status}`;
-        return;
+        throw new Error(`Server error: ${response.status}`);
       }
 
       const text = await response.text();
@@ -38,45 +45,34 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         result = JSON.parse(text);
       } catch (parseErr) {
-        console.error("Could not parse server response as JSON:", text, parseErr);
-        errorEl.textContent = "Invalid response from server (see console).";
-        return;
+        throw new Error("Invalid response format from server.");
       }
 
       if (result && result.success) {
+        // Success: Store user data
         sessionStorage.setItem("loggedInUser", username);
         sessionStorage.setItem("userRole", result.role || "");
         sessionStorage.setItem("fullName", result.fullName || "");
         window.location.href = "index.html";
       } else {
-        console.warn("Login failed:", result);
+        // Login Failed (Wrong credentials)
         errorEl.textContent = result && result.message ? result.message : "Invalid Username or Password.";
+        sessionStorage.clear(); // Safety: Clear any old data on failed attempt
       }
     } catch (err) {
-      console.error("Network or fetch error during login:", err);
-      if (typeof navigator !== "undefined" && !navigator.onLine) {
-        errorEl.textContent = "No network connection. Please check your internet connection and try again.";
-      } else if (err && err.name === "AbortError") {
-        errorEl.textContent = "Request timed out.";
+      // Error handling
+      console.error("Login error:", err);
+      if (err.name === "AbortError") {
+        errorEl.textContent = "Request timed out. Please try again.";
+      } else if (!navigator.onLine) {
+        errorEl.textContent = "No internet connection detected.";
       } else {
-        errorEl.textContent = `Network error: ${err && err.message ? err.message : String(err)}`;
+        errorEl.textContent = err.message || "An unexpected error occurred.";
       }
-
-      try {
-        let dbg = document.getElementById("debug-output");
-        if (!dbg) {
-          dbg = document.createElement("pre");
-          dbg.id = "debug-output";
-          dbg.style.whiteSpace = "pre-wrap";
-          dbg.style.background = "#f8f8f8";
-          dbg.style.padding = "8px";
-          dbg.style.marginTop = "8px";
-          if (errorEl && errorEl.parentNode) errorEl.parentNode.appendChild(dbg);
-        }
-        dbg.textContent = `Endpoint: ${endpoint}\nError: ${String(err)}\nNote: request sent as application/x-www-form-urlencoded. If this still fails, open DevTools → Network and copy the failed request entry.`;
-      } catch (uiErr) {
-        // ignore UI errors
-      }
+    } finally {
+      // Always re-enable the button regardless of success or failure
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Login";
     }
   });
 });
