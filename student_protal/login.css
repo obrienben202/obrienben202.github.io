@@ -1,68 +1,408 @@
+/* Student Portal - Responsive stylesheet
+   Updated: 2025-12-25 by GitHub Copilot
+   This file merges your original styles with responsive helpers and mobile-first layout.
+*/
+
+/* --- 1. Base Styles & Body --- */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #1b9aee;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4; /* Light gray background */
+    margin: 0;
+    padding: 0;
+    color: #333333;
 }
 
-h1 {
-  color: #fff;
-  margin-bottom: 30px;
-  font-size: 50px;
-  text-align: center;
-  font-weight: bold;
+/* ========== Responsive helpers (added) ========== */
+/* Predictable box sizing */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Prevent accidental horizontal scroll as a last resort */
+html, body { max-width: 100%; }
+
+/* Responsive images/icons */
+img, svg, .icon { max-width: 100%; height: auto; display: block; }
+
+/* Allow flex/grid children to shrink inside containers */
+.content-wrapper, .portal-main { min-width: 0; }
+
+/* --- 2. Header (Dark Blue Banner) --- */
+header {
+    background-color: #063f66; /* The dark primary blue */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
 }
 
-.login-box {
-  background-color: white;
-  padding: 30px 40px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  min-width: 320px;
+header h1 {
+    font-size: 2.2em;
+    margin-bottom: 5px;
 }
 
-.login-box label {
-  display: block;
-  text-align: left;
-  margin: 10px 0 5px;
-  font-weight: bold;
+header p {
+    font-size: 1.2em;
+    margin-top: 5px;
 }
 
-.login-box input[type="text"],
-.login-box input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #aaa;
-  border-radius: 6px;
-  font-size: 14px;
+.logout-button {
+    background-color: #e67e22; /* Accent color for the button */
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
 }
 
-/* --- UPDATED: Login Button Styling --- */
-.login-box button {
-  margin-top: 20px;
-  padding: 10px;
-  width: 100%;
-  font-size: 16px;
-  font-weight: bold;
-  
-  /* --- CHANGED: Using Accent Color (#e67e22) for consistency --- */
-  background-color: #e67e22; 
-  color: white;
-  
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added subtle shadow */
-  transition: background-color 0.3s;
+/* ------------------------------------------------ */
+/* --- New Section for Content Wrapper & Dropdowns --- */
+/* ------------------------------------------------ */
+
+/* CRITICAL FIX 1: New Wrapper for positioning context (improved for responsiveness) */
+.content-wrapper {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    /* Ensure there is no height issue with the wrapper */
+    min-height: 50px;
+    padding-left: 16px;   /* horizontal padding for small screens */
+    padding-right: 16px;
+    min-width: 0;         /* lets children shrink on mobile */
 }
 
-.login-box button:hover {
-  /* --- CHANGED: Darker Accent Color (#d16913) for consistency --- */
-  background-color: #d16913;
+/* --- 3. Navigation Bar (Pill Tabs) --- */
+.navbar {
+    display: flex;
+    justify-content: center; /* Centers the nav items */
+    background-color: #3f78a0; /* Slightly lighter blue for nav */
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    overflow-x: auto; /* allow scrolling on small screens */
 }
+
+.navbar a {
+    text-decoration: none;
+    color: #ffffff;
+    /* Pill shape styling */
+    padding: 10px 20px;
+    margin: 0 2px;
+    border-radius: 5px;
+    display: block;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    white-space: nowrap; /* prevent wrapping of each tab */
+}
+
+.navbar a:hover,
+.navbar a.active {
+    background-color: #5599cc; /* Highlight color on hover/active */
+}
+
+/* CRITICAL FIX 2: Dropdown Section Positioning (Now positioned BELOW the Navbar on wide screens, static on small screens) */
+.dropdown-section {
+    position: absolute;
+    top: 50px; /* sits below the navbar */
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* The Grid for the Dropdown Cards */
+.dropdown-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 0;
+}
+.dropdown-grid .card {
+    /* Each item takes a proportional width in the flex container */
+    flex: 0 0 calc(25% - 15px);
+    min-width: 150px; /* Ensure a minimum size */
+    background: #f9f9f9;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    transition: background-color 0.2s;
+    text-align: center;
+}
+.dropdown-grid .card a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #063f66;
+    font-weight: bold;
+}
+.dropdown-grid .card:hover {
+    background-color: #e0f0ff;
+}
+.dropdown-grid .grid-label {
+    width: 100%;
+    color: #e67e22;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+/* ------------------------------------------- */
+/* --- 4. Main Content Layout (Grid) --- */
+/* ------------------------------------------- */
+.portal-main {
+    /* Main container centers the content */
+    max-width: 1200px;
+    /* FIX 3: Reduced top margin since dropdowns are now correctly positioned */
+    margin: 20px auto;
+    padding: 0 20px;
+
+    /* mobile-first: single column */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* medium screens: two columns */
+@media (min-width: 720px) {
+  .portal-main {
+    grid-template-columns: 1fr 1fr; /* two equal columns */
+  }
+  .news-area { grid-column: 1 / span 2; }
+  .quick-links-area { grid-column: auto; }
+}
+
+/* large screens: restore three-column desktop layout */
+@media (min-width: 1024px) {
+  .portal-main {
+    grid-template-columns: 1fr 1fr 250px; /* restore desktop layout: news / news / quick-links */
+    gap: 30px;
+  }
+  .news-area { grid-column: 1 / span 2; }
+  .quick-links-area { grid-column: 3 / 3; }
+}
+
+/* --- 5. News Section Styling --- */
+.latest-news {
+    display: flex;
+    justify-content: space-between; /* Pushes H2 and button to edges */
+    align-items: center; /* Vertically centers the title and button */
+    flex-wrap: wrap; /* Allows the news-grid to wrap below */
+    padding: 0;
+    border: none;
+}
+.news-area h2 {
+    color: #e67e22; /* Accent color for headings */
+    font-size: 1.4em;
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 0; /* Ensures tight alignment with the button */
+}
+
+/* Post News Button */
+#post-news-area {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+#open-post-page {
+    background-color: #e67e22; /* Accent Color */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.1s;
+    font-size: 0.9em;
+    margin-left: 10px;
+}
+
+#open-post-page:hover {
+    background-color: #d16913; /* Slightly darker shade on hover */
+    transform: translateY(-1px); /* Small lift effect */
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* mobile: single column */
+    gap: 20px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* two columns on small tablets/large phones */
+@media (min-width: 600px) {
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* three columns on larger screens */
+@media (min-width: 900px) {
+  .news-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.news-card {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Image sizing to ensure uniform card height */
+.news-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    max-height: 120px; /* Constraint image size for card */
+    object-fit: cover; /* Ensures image fills the area without distortion */
+}
+
+.news-card h3 {
+    font-size: 1.1em;
+    color: #063f66;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.news-card p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 0 0 10px;
+}
+
+.news-card .read-more {
+    color: #e67e22; /* Accent color for the link */
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 0.9em;
+    display: inline-block; /* Allows spacing */
+    margin-top: 5px;
+}
+
+/* Original news-item styles must be overridden/removed */
+.news-item {
+    display: block; /* Overrides original flex layout */
+    margin-bottom: 0;
+}
+
+/* --- 6. Quick Links Sidebar --- */
+.quick-links-area h3 {
+    color: #333;
+    font-size: 1.4em;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.quick-links-area ul {
+    background: white;
+    list-style: none;
+    padding: 10px 20px;
+    margin: 0;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+}
+
+.quick-links-area li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #063f66;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: 500;
+}
+
+.quick-links-area li:last-child a {
+    border-bottom: none;
+}
+
+.quick-links-area .icon {
+    margin-right: 10px;
+    color: #3f78a0;
+    font-size: 1.2em;
+}
+
+/* --- Footer Styling --- */
+footer {
+    clear: both;
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px 0;
+    background: #333;
+    color: white;
+}
+
+/* --- Dropdown and navbar small-screen behavior --- */
+@media (max-width: 920px) {
+  .dropdown-section {
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+    box-shadow: none;
+    padding: 12px;
+    border: none;
+  }
+  .navbar { padding: 8px; }
+}
+
+/* Small screen tweaks */
+@media (max-width: 480px) {
+  header { padding: 14px 8px; }
+  header h1 { font-size: 1.6em; }
+  .content-wrapper { padding-left: 12px; padding-right: 12px; }
+  .portal-main { padding: 0 12px; }
+  .news-grid { gap: 12px; }
+  .dropdown-grid .card { flex: 0 0 48%; }
+}
+
+/* Optional last-resort overflow guard (comment out if not needed) */
+/* html, body { overflow-x: hidden; } */
+
+/* ===== Mobile: make wrapper & hero full width and reduce horizontal padding ===== */
+@media (max-width: 480px) {
+  /* let the page fill the device width (small padding only) */
+  .content-wrapper {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  /* make the header/hero run full-bleed and remove rounded corners on mobile */
+  header,
+  .portal-hero {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* tighten main grid padding */
+  .portal-main {
+    padding-left: 8px;
+    padding-right: 8px;
+    gap: 12px;
+  }
+
+  /* ensure news cards take full width and reduce gaps */
+  .news-grid { gap: 12px; }
+
+  /* dropdown cards smaller to fit two across */
+  .dropdown-grid .card { flex: 0 0 48%; min-width: 0; }
+
+  /* nav pills scroll horizontally instead of wrapping */
+  .navbar { padding: 6px 4px; }
+}
+
+/* End of appended mobile fixes */
