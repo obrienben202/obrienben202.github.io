@@ -59,16 +59,17 @@ header p {
     margin: 0;
 }
 
-.navbar a {
-    text-decoration: none;
-    color: #ffffff;
-    /* Pill shape styling */
-    padding: 10px 20px;
-    margin: 0 2px;
-    border-radius: 5px;
-    display: block;
-    font-weight: bold;
-    transition: background-color 0.3s;
+/* --- 3. Navigation Bar (Responsive) --- */
+.navbar {
+    display: flex;
+    flex-wrap: wrap;           /* Allows items to move to a second row on phones */
+    justify-content: center;   /* Centers items on mobile, looks cleaner */
+    background-color: #3f78a0;
+    padding: 0;
+    list-style: none;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;               /* Ensures it fills the screen on mobile */
 }
 
 .navbar a:hover,
@@ -304,4 +305,45 @@ footer {
     padding: 10px 0;
     background: #333;
     color: white;
+
+}
+
+/* Phone View (Screens smaller than 600px) */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.5em;            /* Smaller text for small screens */
+    }
+
+    .portal-main {
+        grid-template-columns: 1fr;  /* Everything becomes one single column */
+        padding: 0 10px;
+    }
+
+    .news-area, .quick-links-area {
+        grid-column: 1;              /* Force full width */
+    }
+
+    .news-grid {
+        grid-template-columns: 1fr;  /* One news card per row */
+    }
+    
+    .navbar a {
+        font-size: 0.85em;           /* Shrink nav text slightly */
+        padding: 12px 10px;
+    }
+}
+
+/* --- 7. Responsive Media Queries --- */
+
+/* Tablet View (Screens smaller than 1024px) */
+@media (max-width: 1024px) {
+    .portal-main {
+        grid-template-columns: 1fr 1fr; /* Drop the 3rd column for links */
+    }
+    .quick-links-area {
+        grid-column: 1 / span 2;      /* Move Quick Links below News */
+    }
+    .news-grid {
+        grid-template-columns: 1fr 1fr; /* Only 2 news cards per row */
+    }
 }
