@@ -1,0 +1,323 @@
+/* 1. Global Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* 2. Header & Navigation */
+header {
+  background: linear-gradient(120deg, #6a11cb, #2575fc);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+nav {
+  margin-top: 1rem;
+}
+
+nav a {
+  margin: 0 15px;
+  color: white;
+  font-weight: bold;
+  opacity: 0.8;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  position: relative; 
+}
+
+nav a:hover {
+  opacity: 1;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* 3. Sections */
+section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 1rem; /* Increased padding for better breathing room */
+  scroll-margin-top: 20px; 
+  border-bottom: 1px solid #e2e8f0; /* Subtle divider between sections */
+}
+
+section:last-of-type {
+  border-bottom: none; /* No line after the last section */
+}
+
+h2 {
+  color: #1e3a8a;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  text-align: center; /* Centered headings for a modern look */
+}
+
+#about {
+  text-align: center;
+}
+
+.profile-pic {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 20px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* 4. Grid & Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* 5. Work Experience & Buttons */
+.work-list {
+  list-style: none;
+  padding: 0;
+}
+
+.work-list li {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  border-left: 5px solid #1e3a8a;
+}
+
+.cv-button {
+  display: inline-block;
+  background: #1e3a8a;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 1rem;
+  transition: background 0.3s ease;
+}
+
+.cv-button:hover {
+  background: #142159;
+}
+
+/* 6. Contact Section */
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.contact-container input, 
+.contact-container textarea {
+  width: 100%; 
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.contact-container input:focus, 
+.contact-container textarea:focus {
+  outline: none;
+  border-color: #2575fc;
+  box-shadow: 0 0 8px rgba(37, 117, 252, 0.2);
+}
+
+.send-btn {
+  background: #1e3a8a;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+.send-btn:hover {
+  background: #223aa7;
+}
+
+/* 7. Footer */
+footer {
+  background: linear-gradient(120deg, #6a11cb, #2575fc);
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 0; /* Margin removed because section padding handles it now */
+}
+
+/* 8. Social Media Section */
+#media {
+  text-align: center;
+  padding-top: 2rem; /* Reduced top padding to stay close to About Me */
+}
+
+.media-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Helps on mobile */
+  gap: 30px; 
+  margin-top: 10px;
+}
+
+.social-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #1e3a8a;
+  font-weight: bold;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icon {
+  width: 45px;
+  height: 45px;
+  margin-bottom: 8px;
+  transition: filter 0.3s ease;
+  object-fit: contain;
+}
+
+.social-link:hover {
+  transform: translateY(-5px);
+  color: #2575fc;
+}
+
+.social-link:hover .social-icon {
+  filter: brightness(1.1);
+}
+
+/* 9. Dark Mode Styles */
+
+/* This class is triggered by your JavaScript toggle */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* Adjust headings in Dark Mode */
+body.dark-mode h2 {
+  color: #a5b4fc; /* A lighter blue that pops on black */
+}
+
+/* Adjust section dividers */
+body.dark-mode section {
+  border-bottom: 1px solid #333;
+}
+
+/* Adjust Cards & Work Experience items */
+body.dark-mode .card, 
+body.dark-mode .work-list li,
+body.dark-mode .contact-container {
+  background: #1e1e1e;
+  color: #e0e0e0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Adjust Contact Form Inputs */
+body.dark-mode .contact-container input, 
+body.dark-mode .contact-container textarea {
+  background: #2d2d2d;
+  border-color: #444;
+  color: white;
+}
+
+/* Adjust Social Media Links */
+body.dark-mode .social-link {
+  color: #a5b4fc;
+}
+
+/* Ensure icons are visible (slight brightness boost) */
+body.dark-mode .social-icon {
+  filter: brightness(1.2);
+}
+
+.toggle-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  padding: 0;
+  margin-left: 15px;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
+}
+
+.toggle-btn:hover {
+  transform: scale(1.2);
+}
+
+body.dark-mode #projects a {
+  color: #a5b4fc; /* A light, neon-style blue that is easy to read */
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+body.dark-mode .social-link[href*="github"] .social-icon,
+body.dark-mode .social-link[href*="x.com"] .social-icon {
+  filter: invert(1) brightness(2);
+}
+
+/* 2. This ensures LinkedIn and Instagram stay their original colors */
+body.dark-mode .social-link[href*="linkedin"] .social-icon,
+body.dark-mode .social-link[href*="instagram"] .social-icon {
+  filter: none;
+}
+
+header img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+header img:hover {
+    transform: scale(1.1); /* This makes it pop slightly when hovered */
+}
