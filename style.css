@@ -365,3 +365,15 @@ body.dark-mode .project-img {
     width: 100%;
   }
 }
+
+.booking-note {
+  text-align: center;
+  margin-top: 15px;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+body.dark-mode .booking-note {
+  color: #ccc;
+}
